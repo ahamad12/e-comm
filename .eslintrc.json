@@ -1,0 +1,15 @@
+{
+   "extends": [
+        "next/core-web-vitals",
+        "next/typescript",
+        "prettier",
+        "plugin:@tanstack/eslint-plugin-query/recommended"
+    ],
+    "ignorePatterns": [
+        "node_modules",
+        ".next",
+        "out",
+        "build",
+        "next-env.d.ts",
+    ],
+}

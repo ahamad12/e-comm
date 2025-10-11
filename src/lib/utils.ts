@@ -4,3 +4,15 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export async function delay(ms:number){
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function formatCurrency( price: number | string =0,
+  currency: string = "RS", ) {
+    return Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+    }).format(Number(price));
+  }

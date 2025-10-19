@@ -1,0 +1,51 @@
+import { getProductBySlug } from "@/wix-api/prodcuts";
+import { notFound } from "next/navigation";
+import ProductDetails from "./ProductDetails";
+import { Metadata } from "next";
+import { delay } from "@/lib/utils";
+
+interface PageProps {
+  params: { slug: string };
+}
+
+
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const product = await getProductBySlug(slug);
+
+  if (!product) notFound();
+
+  const mainImage = product.media?.mainMedia?.image;
+
+  return {
+    title: product.name,
+    description: "Get this product on Flow Shop",
+    openGraph: {
+      images: mainImage?.url
+        ? [
+            {
+              url: mainImage.url,
+              width: mainImage.width,
+              height: mainImage.height,
+              alt: mainImage.altText || "",
+            },
+          ]
+        : undefined,
+    },
+  };
+}
+
+export default async function ProductPage({params}: PageProps) {
+
+    await delay(3000);
+    const {slug} = await params;
+    const product = await getProductBySlug(slug);
+
+    console.log("seeeee", product);
+    if(!product) notFound();
+
+    return <main className="max-w-7xl mx-auto space-y-10 px-5 py-10">
+        <ProductDetails product={product}/>
+    </main>
+}

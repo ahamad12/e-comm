@@ -5,15 +5,16 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "next-themes";
 
 const lora = Lora({
-    subsets: ["latin"],
-    variable: "--font-lora",
-    weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title:{
+  title: {
     template: "%s | Flow Shop",
     absolute: "Flow Shop",
   },
@@ -26,16 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${lora.className} antialiased`}
-      >
-        <ReactQueryProvider>
-        <Navbar />
-        {children}
-        <Footer />
-        </ReactQueryProvider>
-        <Toaster/>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${lora.className} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          disableTransitionOnChange={true}
+        >
+          <ReactQueryProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ReactQueryProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

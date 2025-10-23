@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { InfoIcon } from "lucide-react";
+import AddToCartButton from "@/components/AddToCartButton";
 interface ProductDetailsProps {
   product: products.Product;
 }
@@ -104,6 +105,16 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                 }
             </div>
         </div>
+        {inStock ?(
+          <AddToCartButton
+          product={product}
+          selectedOptions={selectedOptions}
+          quantity={quantity}
+          disabled={availableQuantityExceeded || quantity < 1}
+          />
+        ):(
+          "Out of Stock"
+        )}
         {!!product.additionalInfoSections?.length && (
             <div className="space-y-1.5 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">

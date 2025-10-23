@@ -3,6 +3,9 @@ import { Lora } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ReactQueryProvider from "./ReactQueryProvider";
+import { Toaster } from "sonner";
+
 const lora = Lora({
     subsets: ["latin"],
     variable: "--font-lora",
@@ -27,9 +30,12 @@ export default function RootLayout({
       <body
         className={`${lora.className} antialiased`}
       >
+        <ReactQueryProvider>
         <Navbar />
         {children}
         <Footer />
+        </ReactQueryProvider>
+        <Toaster/>
       </body>
     </html>
   );

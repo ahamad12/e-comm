@@ -8,18 +8,19 @@ import { Suspense } from "react";
 
 interface LayoutProps {
   children: React.ReactNode;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export default function Layout({ children, params }: LayoutProps) {
+export default async function Layout({ children, params }: LayoutProps) {
+  const { slug } = await params;
   return (
     <Suspense fallback={<LoadingSkeleton />}>
-      <CollectionsLayout params={params}>{children}</CollectionsLayout>
+      <CollectionsLayout slug={slug}>{children}</CollectionsLayout>
     </Suspense>
   );
 }
 
-async function CollectionsLayout({ children, params: { slug } }: LayoutProps) {
+async function CollectionsLayout({ children, slug }: { children: React.ReactNode; slug: string }) {
   const wixClient = await getWixServerClient();
   const collection = await getCollectionBySlug(wixClient, slug);
 

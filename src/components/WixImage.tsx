@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ImgHTMLAttributes } from "react";
 import { media as wixMedia } from "@wix/sdk";
 
@@ -35,5 +36,5 @@ export default function WixImage({
         )
       : wixMedia.getImageUrl(mediaIdentifier).url
     : placeholder;
-  return <img src={imageUrl} alt={alt || ""} {...props} />;
+  return <Image src={imageUrl!} alt={alt || ""} {...(props as any)} />;
 }

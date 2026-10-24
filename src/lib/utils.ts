@@ -1,6 +1,9 @@
+import { products } from "@wix/stores";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { products } from "@wix/stores";
+
+
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,12 +15,11 @@ export async function delay(ms: number) {
 
 export function formatCurrency(
   price: number | string = 0,
-  currency: string = "RS",
+  currency: string = "USD",
 ) {
-  return Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(Number(price));
+  return Intl.NumberFormat("en", { style: "currency", currency }).format(
+    Number(price),
+  );
 }
 
 export function findVariant(

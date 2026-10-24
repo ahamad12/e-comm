@@ -12,10 +12,10 @@ A modern, mobile-responsive e-commerce application built with Next.js 15, TypeSc
 ## Screenshots
 
 ### Home Page
-![Home Page](/images/home.png)
+![Home Page](public/images/home.png)
 
 ### Product Page
-![Product Page](/images/product-page.png)
+![Product Page](public/images/product-page.png)
 
 ## Tech Stack
 - **Framework:** Next.js 15 (App Router)
